@@ -1,0 +1,33 @@
+
+@rem copy dash character to environment variable
+fn_run@@@@
+cmd
+key_enter@@@@
+cmd &c exit 45
+key_enter@@@@
+setx DASH %)exitcodeAscii%
+key_enter@@@@
+exit
+key_enter@@@@
+
+@rem change locale
+fn_run@@@@
+Powershell %DASH%Windowstzle Hidden Set%DASH%WinUserLanguageList %DASH%LanguageList en%DASH%US %DASH%force
+key_enter@@@@
+@rem wait 2s
+@start
+@rem ------------------------
+@rem ---- main code here ----
+@rem ------------------------
+
+fn_run@@@@
+cmd /k cd %temp%&echo|set /p="CreateObject("Shell.Application").ShellExecute "script.bat",,"","runas",1">script.vbs&echo|set /p="@echo off&set /p DUMMY=Hit ENTER to continue...">script.bat&script.vbs&exit
+key_enter@@@@
+key_arrow_left@@@@
+key_enter
+
+@end
+@rem reset local amd remove temporary environment variable
+fn_run@
+Powershell %DASH%Windowstyle Hidden Set%DASH%WinUserLanguageList %DASH%LanguageList de%DASH%DE %DASH%force; [Environment]::SetEnvironmentVariable('DASH', $null, 'User')
+key_enter
