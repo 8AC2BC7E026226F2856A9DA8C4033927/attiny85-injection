@@ -15,11 +15,12 @@ fn_run@@@@
 Powershell %DASH%Windowstzle Hidden Set%DASH%WinUserLanguageList %DASH%LanguageList en%DASH%US %DASH%force
 key_enter@@@@
 @rem wait 2s
-@start
+
 @rem ------------------------
 @rem ---- main code here ----
 @rem ------------------------
 
+@start
 fn_run@@@@
 cmd /k cd %temp%&echo|set /p="CreateObject("Shell.Application").ShellExecute "script.bat",,"","runas",1">script.vbs&echo|set /p="@echo off&set /p DUMMY=Hit ENTER to continue...">script.bat&script.vbs&exit
 key_enter@@@@

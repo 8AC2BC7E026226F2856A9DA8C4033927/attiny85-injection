@@ -8,12 +8,12 @@
             "name": "Python: Attiny Precompiler",
             "type": "python",
             "request": "launch",
-            "program": "utility/attiny_precompiler/attiny_precompiler.py",
+            "program": "attiny_precompiler/precompiler.py",
             "console": "integratedTerminal",
             "justMyCode": true,
             "args": [
                 "injection/initial_payload.cno",
-                "code_blocks.h",
+                "injector/code_blocks.h",
             ],
         },
         {
