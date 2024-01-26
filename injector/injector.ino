@@ -4,7 +4,7 @@
 
 #define PIN_LED 1 // led on model a
 #define DEFAULT_LED_TIME 500
-#define DEFAULT_DELAY_TIME 500
+#define DEFAULT_DELAY_TIME 400
 
 void printCharacter(const char* address, byte& offset, char character) {
   if (character == '~') {

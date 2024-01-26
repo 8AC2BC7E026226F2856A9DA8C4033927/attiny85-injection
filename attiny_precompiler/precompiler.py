@@ -6,6 +6,7 @@ special_functions = {
     'key_arrow_left': 'DigiKeyboard.sendKeyStroke(KEY_ARROW_LEFT);',
     'key_double_quotes': 'DigiKeyboard.sendKeyStroke(KEY_2, MOD_SHIFT_LEFT);',
     'fn_run': 'DigiKeyboard.sendKeyStroke(KEY_R, MOD_GUI_LEFT);',
+    'fn_keyboard_interrupt': 'DigiKeyboard.sendKeyStroke(KEY_C, MOD_CONTROL_LEFT);',
 }
 
 files = {
